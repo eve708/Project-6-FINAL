@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Water Run: 
+    The Clean Quest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .game-title {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 2em;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #222;
+      margin: 0 0 10px 0;
+    }
+    .player-img {
+      width: 40px;
+      height: 60px;
+      display: block;
+      margin: 0 auto;
+    }
+    .legend {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 1em;
+    }
+    .legend-item {
+      display: inline-block;
+      margin: 0 8px;
+      font-size: 0.95em;
+    }
+    @media (max-width: 500px) {
+      .legend {
+        font-size: 0.85em;
+      }
+      #game {
+        width: 98vw;
+        height: 60vw;
+        min-width: 220px;
+        min-height: 300px;
+        max-width: 360px;
+        max-height: 600px;
+      }
+    }
+    .homepage {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .village-list {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .village {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px;
+      width: 30%;
+      box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+    .village:hover {
+      transform: scale(1.05);
+    }
+    .village-img {
+      width: 100%;
+      border-radius: 4px;
+    }
+    .village-title {
+      font-weight: 700;
+      margin: 10px 0 5px 0;
+    }
+    .village-desc {
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .start-village-btn {
+      background: #FFC907;
+      color: rgb(0, 0, 0);
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+    .start-village-btn:hover {
+      background: #FFC907;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      background: #f1f1f1;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    .footer-content {
+      font-size: 0.9em;
+      color: #333;
+    }
+    .footer a {
+      color: #FFC907;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a href="#homepage-view" class="navbar-logo" id="navbar-logo-link">
+      <img src="img/LOGO.png" alt="Logo">
+    </a>
+    <div class="navbar-title">Water Run: The Clean Quest</div>
+    <div class="navbar-menu">
+      <button id="hamburger-btn" aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div id="menu-dropdown" class="menu-dropdown" style="display:none;">
+        <a href="https://www.charitywater.org/" target="_blank">Learn more about charity: water</a>
+        <button id="about-btn">About</button>
+      </div>
+    </div>
+  </header>
+  <div id="about-modal" class="modal" style="display:none;z-index:4000;">
+    <div class="modal-content">
+      <h2>About Water Run: The Clean Quest</h2>
+      <p>This game raises awareness about the importance of clean water and the challenges faced in accessing it. Play, learn, and help make a difference!</p>
+      <button id="close-about-btn">Close</button>
+    </div>
+  </div>
+  <div id="homepage-view" class="view active">
+    <br>
+    <div class="game-title">Begin Your Water Quest</div>
+    <div class="legend">
+      <span class="legend-item">💧 Clean Water</span>
+      <span class="legend-item">🧪 Contaminated Water</span>
+      <span class="legend-item">🪨 Obstacle</span>
+    </div>
+    <div id="homepage" class="homepage">
+      <div class="village-list">
+        <div class="village" data-difficulty="1">
+          <img src="img/Level1.png" alt="Village 1" class="village-img">
+          <div class="village-title">Village 1</div>
+          <div class="village-desc">A small riverside village. Easy terrain, short distance.</div>
+          <button class="start-village-btn">Start Game</button>
+        </div>
+        <div class="village" data-difficulty="2">
+          <img src="img/Level2.png" alt="Village 2" class="village-img">
+          <div class="village-title">Village 2</div>
+          <div class="village-desc">A hilly village. Moderate obstacles, medium distance.</div>
+          <button class="start-village-btn">Start Game</button>
+        </div>
+        <div class="village" data-difficulty="3">
+          <img src="img/Level3.png" alt="Village 3" class="village-img">
+          <div class="village-title">Village 3</div>
+          <div class="village-desc">A remote mountain village. Many obstacles, long distance.</div>
+          <button class="start-village-btn">Start Game</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="game-view" class="view" style="display:none;">
+    <div id="fail-flash" style="display:none;"></div>
+    <div style="height: 24px; margin-bottom: 8px;"></div>
+    <div class="game-title">Water Run: The Clean Quest</div>
+    <div class="legend">
+      <span class="legend-item">💧 Clean Water</span>
+      <span class="legend-item">🧪 Contaminated Water</span>
+      <span class="legend-item">🪨 Obstacle</span>
+    </div>
+    <div id="game">
+      <div class="player" id="player">
+        <img src="img/human.svg" alt="Player" class="player-img" />
+      </div>
+      <div id="jerrycan">
+        <div id="water-level"></div>
+      </div>
+      <div id="timer">10</div>
+    </div>
+    <div class="game-controls">
+      <button id="start-pause-btn">Start</button>
+      <button id="restart-btn">Restart</button>
+    </div>
+    <div id="end-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <img src="img/JerryCan.png" alt="Jerrycan" style="width:80px; margin-bottom:16px;" id="end-jerrycan-img">
+        <div id="end-message"></div>
+        <div class="modal-buttons">
+          <button id="next-level-btn" class="start-village-btn" style="display:none;">Next Level</button>
+          <button id="return-home-btn" class="start-village-btn">Return to Home</button>
+          <a id="charity-link" href="https://www.charitywater.org/" target="_blank">
+            Want to help more? Visit charitywater.org.
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <span>Support clean water for all! </span>
+      <a href="https://www.charitywater.org/" target="_blank">charity: water</a> |
+      <a href="https://www.charitywater.org/donate" target="_blank">Donate</a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Hamburger menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const menuDropdown = document.getElementById('menu-dropdown');
+      hamburgerBtn.addEventListener('click', function() {
+        menuDropdown.style.display = menuDropdown.style.display === 'block' ? 'none' : 'block';
+      });
+      // About modal toggle
+      const aboutBtn = document.getElementById('about-btn');
+      const aboutModal = document.getElementById('about-modal');
+      const closeAboutBtn = document.getElementById('close-about-btn');
+      aboutBtn.addEventListener('click', function() {
+        aboutModal.style.display = 'flex';
+        menuDropdown.style.display = 'none';
+      });
+      closeAboutBtn.addEventListener('click', function() {
+        aboutModal.style.display = 'none';
+      });
+      window.addEventListener('click', function(e) {
+        if (e.target === aboutModal) aboutModal.style.display = 'none';
+      });
+      // Navbar logo click to go to homepage
+      const logoLink = document.getElementById('navbar-logo-link');
+      logoLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('game-view').style.display = 'none';
+        document.getElementById('homepage-view').style.display = '';
+        document.getElementById('homepage-view').classList.add('active');
+        document.getElementById('game-view').classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
